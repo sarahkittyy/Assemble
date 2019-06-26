@@ -13,7 +13,7 @@ public:
 	 * @brief Init the app
 	 * 
 	 */
-	Applicaton();
+	Application();
 
 	/**
 	 * @brief Run the app
