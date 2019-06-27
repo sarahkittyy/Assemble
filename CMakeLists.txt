@@ -17,6 +17,7 @@ target_compile_options(Assemble PUBLIC -Wall)
 target_include_directories(Assemble PUBLIC 
 	"include/"
 	"lib/imgui"
+	"lib/nlohmann"
 )
 target_link_libraries(Assemble 
 	sfml-graphics 
