@@ -45,6 +45,13 @@ public:
 	 */
 	virtual void update();
 
+	/**
+	 * @brief Handle an event raised by the sfml window.
+	 * 
+	 * @param event The event to handle.
+	 */
+	virtual void onEvent(const sf::Event& event);
+
 protected:
 	/**
 	 * @brief For derived states, to use the environment window.

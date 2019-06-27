@@ -21,6 +21,10 @@ void State::update()
 	window().display();
 }
 
+void State::onEvent(const sf::Event& event)
+{
+}
+
 sf::RenderWindow& State::window()
 {
 	return *mWindow;
