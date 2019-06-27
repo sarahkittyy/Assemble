@@ -25,15 +25,22 @@ int Application::run()
 		{
 			// Process ImGui events.
 			ImGui::SFML::ProcessEvent(event);
+			// Special window events
 			switch (event.type)
 			{
 			case sf::Event::Closed:
 				mWindow.close();
 				break;
 
+			case sf::Event::Resized:
+				mWindow.setSize(event.size.width, event.size.height);
+				break;
+
 			default:
 				break;
 			}
+			// Pass all events to the current state.
+			mSM.onEvent(event);
 		}
 		// Update ImGui.
 		ImGui::SFML::Update(mWindow, appClock.restart());

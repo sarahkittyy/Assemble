@@ -43,6 +43,13 @@ public:
 	 */
 	void update();
 
+	/**
+	 * @brief Pass an SFML window event onto the current app state.
+	 * 
+	 * @param event The event to process.
+	 */
+	void onEvent(const sf::Event& event);
+
 private:
 	/// App window
 	sf::RenderWindow* mWindow;

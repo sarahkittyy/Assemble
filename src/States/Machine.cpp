@@ -44,4 +44,9 @@ void Machine::update()
 	}
 }
 
+void Machine::onEvent(const sf::Event& event)
+{
+	mState->onEvent(event);
+}
+
 }
