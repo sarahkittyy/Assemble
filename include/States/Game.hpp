@@ -15,6 +15,9 @@ public:
 	void init();
 
 	void update();
+
+private:
+	void drawGUI();
 };
 
 }

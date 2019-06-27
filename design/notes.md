@@ -20,6 +20,8 @@ Tile based factory building game.
     
 * Hotkeys
     * ESC / Click in gui `->` deselect tower.
+    * Shift `->` hold to place many
+    * S `->` Sell
     
 * Map design
     * Tiles are 32x32, start on a 8x8 grid of these tiles.

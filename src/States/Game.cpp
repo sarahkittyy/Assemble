@@ -9,9 +9,20 @@ void Game::init()
 
 void Game::update()
 {
-	window().clear(sf::Color(127, 127, 255));
+	// Set GUI for button / state retrieval.
+	drawGUI();
+	// Updates
 
+
+	// Begin Drawing
+	window().clear();
+
+	ImGui::SFML::Render(window());
 	window().display();
+}
+
+void Game::drawGUI()
+{
 }
 
 }
