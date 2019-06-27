@@ -35,9 +35,11 @@ Tile based factory building game.
         * Base (Environment ontop of water)
         * Locking layer (Blacked out / locked tiles)
         * Resource / Detail (Coal, Stone)
-        * Buildings
+
+* Buildings
+    * Separate, non-tile objects.
             
-* Tick-based update system. (n ticks / s, one update / tick)
+* Tick-based update system. (N ticks / second, one update / tick)
     
 ## Base buildings
 
