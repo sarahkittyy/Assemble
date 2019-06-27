@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 #include <functional>
+#include "imgui/imgui-SFML.h"
+#include "imgui/imgui.h"
 
 #include "ResourceManager.hpp"
 
