@@ -1,7 +1,8 @@
 #include "Application.hpp"
 
 Application::Application()
-	: mWindow(sf::VideoMode(500, 500), "Assemble")
+	: mWindow(sf::VideoMode(500, 500), "Assemble"),
+	  mSM(&mWindow, &mResource, new States::Game())
 {
 }
 
@@ -25,11 +26,9 @@ int Application::run()
 			}
 		}
 
-		// Clear the window
-		mWindow.clear();
-		// Draw
-
-		// Flip
-		mWindow.display();
+		// Update the state machine.
+		mSM.update();
 	}
+
+	return 0;
 }

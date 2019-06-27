@@ -2,6 +2,10 @@
 
 #include <SFML/Graphics.hpp>
 
+#include "ResourceManager.hpp"
+
+#include "States/States.hpp"
+
 /**
  * @brief Main app class
  * 
@@ -25,4 +29,8 @@ public:
 private:
 	/// The app window.
 	sf::RenderWindow mWindow;
+	/// The app resource manager.
+	ResourceManager mResource;
+	/// The app state machine.
+	States::Machine mSM;
 };
