@@ -40,6 +40,9 @@ int Application::run()
 
 		// Update the state machine.
 		mSM.update();
+
+		// End the ImGui Update.
+		ImGui::EndFrame();
 	}
 
 	return 0;
