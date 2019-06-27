@@ -4,6 +4,11 @@ Application::Application()
 	: mWindow(sf::VideoMode(800, 600), "Assemble"),
 	  mSM(&mWindow, &mResource, new States::Game())
 {
+	// Load and set icon.
+	sf::Image icon;
+	icon.loadFromFile("resource/icon.png");
+	mWindow.setIcon(32, 32, icon.getPixelsPtr());
+
 	ImGui::SFML::Init(mWindow);
 }
 
