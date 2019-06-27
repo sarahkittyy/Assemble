@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Graphics/Tilemap.hpp"
 #include "States/State.hpp"
 
 namespace States

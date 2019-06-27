@@ -16,7 +16,6 @@ void Game::update()
 
 	// Begin Drawing
 	window().clear();
-
 	ImGui::SFML::Render(window());
 	window().display();
 }
