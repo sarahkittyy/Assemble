@@ -33,7 +33,7 @@ int Application::run()
 				break;
 
 			case sf::Event::Resized:
-				mWindow.setSize(event.size.width, event.size.height);
+				mWindow.setSize(sf::Vector2u(event.size.width, event.size.height));
 				break;
 
 			default:
