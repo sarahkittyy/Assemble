@@ -23,7 +23,7 @@ public:
 	template <typename... Args>
 	Pannable(sf::RenderWindow* window,
 			 Args&&... args)
-		: mItem(args...),
+		: mObject(args...),
 		  mWindow(window),
 		  mPanning(false),
 		  mPanScale(1)
@@ -47,7 +47,7 @@ public:
 	 */
 	T& get()
 	{
-		return mItem;
+		return mObject;
 	}
 
 	/**
@@ -70,7 +70,7 @@ public:
 	{
 		mPanning = true;
 		mPanStartPos = mousePos();
-		mObjectStartPos = mObject.getPosition();
+		mObjStartPos = mObject.getPosition();
 	}
 
 	void stopPanning()
