@@ -19,6 +19,8 @@ public:
 
 private:
 	void drawGUI();
+
+	std::shared_ptr<Graphics::Tilemap> map;
 };
 
 }

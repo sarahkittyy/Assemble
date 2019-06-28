@@ -21,8 +21,6 @@ void Tilemap::loadFromFile(std::string file)
 {
 	namespace fs = std::filesystem;
 	using nlohmann::json;
-	// Clear vertices
-	mVertices.clear();
 
 	// Get the file json data.
 	json data = *mResource->json(file);
@@ -48,8 +46,15 @@ void Tilemap::loadFromFile(std::string file)
 	// Texture props
 	mProps.texSize = sf::Vector2i(mTexture->getSize());
 
-	// Iterate over all tiles.
+	// Init the tiles from the map
 	mTiles = data.at("layers")[0].at("data").get<std::vector<int>>();
+	loadVertices();
+}
+
+void Tilemap::loadVertices()
+{
+	mVertices.clear();
+	// Iterate over all tiles, appending them to the vertex array.
 	for (size_t i = 0; i < mTiles.size(); ++i)
 	{
 		int id = mTiles[i];
@@ -81,6 +86,72 @@ void Tilemap::loadFromFile(std::string file)
 			sf::Vector2f(map_pos.x, map_pos.y + mProps.tileSize.y),
 			sf::Vector2f(tex_pos.x, tex_pos.y + mProps.tileSize.y)));
 	}
+}
+
+int Tilemap::getTileID(int pos)
+{
+	if (pos < 0 || pos >= mTiles.size())
+	{
+		return -1;
+	}
+	return mTiles[pos];
+}
+
+int Tilemap::getTileID(int x, int y)
+{
+	int pos = x + y * mProps.gridSize.x;
+	if (pos < 0 || pos >= mTiles.size())
+	{
+		return -1;
+	}
+	return mTiles[x + y * mProps.gridSize.x];
+}
+
+void Tilemap::autoTile()
+{
+	// Append all new bitmasked tiles here.
+	std::vector<int> newTiles;
+	// Iterate over all tiles.
+	for (size_t i = 0; i < mTiles.size(); ++i)
+	{
+		// Get the X and Y position of the tile.
+		int x = i % mProps.gridSize.x;
+		int y = i / mProps.gridSize.x;
+
+		// If the tile itself isn't solid (ID < 1), ignore.
+		if (int id = getTileID(x, y); id < 1)
+		{
+			newTiles.push_back(id);
+			continue;
+		}
+
+		// Get all neighboring tiles.
+		// - 0 -
+		// 1 - 2
+		// - 3 -
+		// -------
+		int neighbors[4] = {
+			getTileID(x, y - 1),
+			getTileID(x - 1, y),
+			getTileID(x + 1, y),
+			getTileID(x, y + 1)};
+
+		// Bitmask all solid neighbors (ID >= 1)
+		unsigned char solid_neighbors = 0;
+		for (int n = 0; n < 4; ++n)
+		{
+			if (neighbors[n] >= 1)
+			{
+				solid_neighbors |= (1 << n);
+			}
+		}
+
+		// Load the new tile ID into the new tiles vector.
+		newTiles.push_back(solid_neighbors + 1);
+	}
+	// Load the finished tiles.
+	mTiles = newTiles;
+	loadVertices();
 }
 
 void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const

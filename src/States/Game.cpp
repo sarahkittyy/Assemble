@@ -5,6 +5,8 @@ namespace States
 
 void Game::init()
 {
+	map.reset(new Graphics::Tilemap(&resource(), "resource/maps/map.json"));
+	map->autoTile();
 }
 
 void Game::update()
@@ -16,6 +18,7 @@ void Game::update()
 
 	// Begin Drawing
 	window().clear();
+	window().draw(*map);
 
 	ImGui::SFML::Render(window());
 	window().display();
