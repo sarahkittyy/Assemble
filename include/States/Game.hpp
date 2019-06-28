@@ -20,7 +20,10 @@ public:
 private:
 	void drawGUI();
 
-	std::shared_ptr<Graphics::Tilemap> map;
+	/// The game background.
+	sf::RectangleShape mBackground;
+	/// Held out of the ResourceManager so we can use setRepeated() safely.
+	sf::Texture mBackgroundTexture;
 };
 
 }

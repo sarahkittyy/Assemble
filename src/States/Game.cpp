@@ -5,8 +5,14 @@ namespace States
 
 void Game::init()
 {
-	map.reset(new Graphics::Tilemap(&resource(), "resource/maps/map.json"));
-	map->autoTile();
+	// Load the background
+	mBackgroundTexture = *resource()
+							  .texture("resource/env/water.png");
+	mBackgroundTexture.setRepeated(true);
+	mBackground.setTexture(&mBackgroundTexture);
+	sf::Vector2i windowSize = sf::Vector2i(window().getSize());
+	mBackground.setSize(sf::Vector2f(windowSize));
+	mBackground.setTextureRect(sf::IntRect(0, 0, windowSize.x, windowSize.y));
 }
 
 void Game::update()
@@ -18,7 +24,9 @@ void Game::update()
 
 	// Begin Drawing
 	window().clear();
-	window().draw(*map);
+	window().draw(mBackground);   // Draw the background first
+
+
 
 	ImGui::SFML::Render(window());
 	window().display();
