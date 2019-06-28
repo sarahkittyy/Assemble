@@ -118,10 +118,9 @@ sf::Vector2i Tilemap::getMousePosition(sf::RenderWindow* window)
 
 	// Cast the mouse pos into tilemap coords.
 	sf::Vector2i map_coords = {
-		mouse_pos.x / mProps.tileSize.x,
-		mouse_pos.y / mProps.tileSize.y
-	};
-	
+		int(mouse_pos.x / mProps.tileSize.x),
+		int(mouse_pos.y / mProps.tileSize.y)};
+
 	// Return the coordinates
 	return map_coords;
 }
