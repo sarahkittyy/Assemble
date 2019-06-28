@@ -27,7 +27,6 @@ void Game::update()
 	window().draw(mBackground);   // Draw the background first
 
 
-
 	ImGui::SFML::Render(window());
 	window().display();
 }
