@@ -107,6 +107,25 @@ int Tilemap::getTileID(int x, int y)
 	return mTiles[x + y * mProps.gridSize.x];
 }
 
+sf::Vector2i Tilemap::getMousePosition(sf::RenderWindow* window)
+{
+	// Get the mouse pos.
+	sf::Vector2f mouse_pos = (sf::Vector2f)sf::Mouse::getPosition(*window);
+
+	// Transform the mouse position so it's in-line with the
+	// map's current transform.
+	mouse_pos = getInverseTransform().transformPoint(mouse_pos);
+
+	// Cast the mouse pos into tilemap coords.
+	sf::Vector2i map_coords = {
+		mouse_pos.x / mProps.tileSize.x,
+		mouse_pos.y / mProps.tileSize.y
+	};
+	
+	// Return the coordinates
+	return map_coords;
+}
+
 void Tilemap::autoTile()
 {
 	// Append all new bitmasked tiles here.
@@ -160,5 +179,4 @@ void Tilemap::draw(sf::RenderTarget& target, sf::RenderStates states) const
 	states.texture = mTexture;
 	target.draw(mVertices, states);
 }
-
 }

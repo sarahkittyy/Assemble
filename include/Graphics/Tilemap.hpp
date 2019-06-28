@@ -74,6 +74,16 @@ public:
 	 * When a bit is set, that means that there *is* a tile there.
 	 */
 	void autoTile();
+	
+	/**
+	 * @brief Converts the window-relative mouse position
+	 * into the position of the tile the mouse is on.
+	 * 
+	 * @param window The window the mouse is relative to.
+	 * 
+	 * @return sf::Vector2i The pos of the tile the mouse is over. 
+	 */
+	sf::Vector2i getMousePosition(sf::RenderWindow* window);
 
 	/**
 	 * @brief Get the ID of a tile at a given position. 
