@@ -24,10 +24,30 @@ public:
 	 */
 	MouseFreelook();
 
+	/**
+	 * @brief Unlock the engine, enabling mouse controls.
+	 * 
+	 */
 	void select();
+
+	/**
+	 * @brief Lock the engine, stopping mouse controls.
+	 * 
+	 */
 	void deselect();
 
+	/**
+	 * @brief Attach a transformable object to the engine.
+	 * 
+	 * @param obj The object to attach.
+	 */
 	void attach(sf::Transformable* obj);
+
+	/**
+	 * @brief Removes an object from the engine.
+	 * 
+	 * @param obj The object to remove.
+	 */
 	void remove(sf::Transformable* obj);
 
 	/**
@@ -56,6 +76,8 @@ private:
 	const float INF;
 	/// All contained transformables controlled by the mouse
 	std::vector<sf::Transformable*> mObjects;
+	/// Tracks position shift applied, and allows for reversing on reset()
+	sf::Vector2f mPosShift;
 	/// True if the current group of objcts is selected.
 	bool mSelected;
 	/// Last recorded mouse position, for smooth movement.

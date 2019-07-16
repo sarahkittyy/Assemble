@@ -5,6 +5,7 @@ namespace Util
 
 MouseFreelook::MouseFreelook()
 	: INF(std::numeric_limits<float>::infinity()),
+	  mPosShift(0, 0),
 	  mSelected(false),
 	  mLastMousePos(INF, 0)
 {
@@ -20,6 +21,7 @@ void MouseFreelook::deselect()
 	mSelected = false;
 	// Mark the mouse position to be re-tracked after deselecting.
 	mLastMousePos.x = INF;
+	mPosShift = {0, 0};
 }
 
 void MouseFreelook::attach(sf::Transformable* obj)
@@ -42,6 +44,15 @@ void MouseFreelook::remove(sf::Transformable* obj)
 
 void MouseFreelook::reset()
 {
+	// Undo the transform on all transformables.
+	std::for_each(mObjects.begin(), mObjects.end(),
+				  [this](sf::Transformable*& obj) -> void {
+					  obj->setScale({1, 1});
+					  obj->move(-1.f * mPosShift);
+				  });
+
+	// Reset the position tracker.
+	mPosShift = {0.f, 0.f};
 }
 
 void MouseFreelook::onMouseMove(float x, float y)
@@ -60,6 +71,10 @@ void MouseFreelook::onMouseMove(float x, float y)
 	float dx, dy;
 	dx = x - mLastMousePos.x;
 	dy = y - mLastMousePos.y;
+
+	// Track the transform.
+	mPosShift.x += dx;
+	mPosShift.y += dy;
 
 	// Transform each transformable.
 	std::for_each(mObjects.begin(),
