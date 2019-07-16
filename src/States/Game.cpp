@@ -15,12 +15,15 @@ void Game::init()
 	mBackground.setTextureRect(sf::IntRect(0, 0, windowSize.x, windowSize.y));
 }
 
+void Game::onEvent(const sf::Event& event)
+{
+}
+
 void Game::update()
 {
 	// Set GUI for button / state retrieval.
 	drawGUI();
 	// Updates
-
 
 	// Begin Drawing
 	window().clear();

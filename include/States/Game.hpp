@@ -2,6 +2,7 @@
 
 #include "Graphics/Tilemap.hpp"
 #include "States/State.hpp"
+#include "Util/MouseFreelook.hpp"
 
 namespace States
 {
@@ -16,6 +17,8 @@ public:
 	void init();
 
 	void update();
+
+	void onEvent(const sf::Event& event);
 
 private:
 	void drawGUI();
