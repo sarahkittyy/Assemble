@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Assemble/GUI.hpp"
 #include "Graphics/Tilemap.hpp"
 #include "States/State.hpp"
 #include "Util/MouseFreelook.hpp"
@@ -27,6 +28,8 @@ private:
 	sf::RectangleShape mBackground;
 	/// Held out of the ResourceManager so we can use setRepeated() safely.
 	sf::Texture mBackgroundTexture;
+	/// Game GUI engine.
+	Assemble::GUI mGUI;
 };
 
 }

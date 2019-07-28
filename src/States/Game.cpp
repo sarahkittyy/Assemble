@@ -10,13 +10,23 @@ void Game::init()
 							  .texture("resource/env/water.png");
 	mBackgroundTexture.setRepeated(true);
 	mBackground.setTexture(&mBackgroundTexture);
+
 	sf::Vector2i windowSize = sf::Vector2i(window().getSize());
+	mGUI.setWindowSize((sf::Vector2u)windowSize);
 	mBackground.setSize(sf::Vector2f(windowSize));
 	mBackground.setTextureRect(sf::IntRect(0, 0, windowSize.x, windowSize.y));
 }
 
 void Game::onEvent(const sf::Event& event)
 {
+	switch (event.type)
+	{
+	default:
+		break;
+	case sf::Event::Resized:
+		mGUI.setWindowSize({event.size.width, event.size.height});
+		break;
+	}
 }
 
 void Game::update()
@@ -29,8 +39,7 @@ void Game::update()
 	window().clear();
 	window().draw(mBackground);   // Draw the background first
 
-
-	ImGui::SFML::Render(window());
+	mGUI.render(window());
 	window().display();
 }
 
